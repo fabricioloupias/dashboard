@@ -1,0 +1,23 @@
+<div class="container">
+  <h2>Registro</h2>
+  <form class="example-form my-5" [formGroup]="registerUser" (ngSubmit)="addUser()">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Nombre" type="text" formControlName="name" value="">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Apellido" type="text" formControlName="apellido"
+        value="">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Email" type="text" formControlName="email" value="">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Password" formControlName="password" [type]="hide ? 'password' : 'text'">
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Pais" type="text" formControlName="pais"  value="">
+    </mat-form-field>
+    <button type="submit" [disabled]="! registerUser.valid" mat-raised-button color="warn">Registrar</button>
+  </form>
+</div>

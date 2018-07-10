@@ -1,0 +1,62 @@
+<div class="container">
+  
+  <div class="row justify-content-center align-items-center">
+    
+    <div class="col-8">
+        <h2>Subir foto (npm i ng2-file-upload)</h2>
+        <a href="https://valor-software.com/ng2-file-upload/">https://valor-software.com/ng2-file-upload/</a>
+      <div class="row my-5">
+        <div class="col-md-12">
+          <button class="d-block" mat-raised-button color="primary" (click)="fileInput.click()">Nueva foto</button>
+          <input class="d-none" #fileInput name="image" type="file" multiple ng2FileSelect [uploader]="uploader">
+        </div>
+        <div class="col-md-12">
+          <div class="row align-items-center my-5" *ngFor="let item of uploader.queue">
+            <div class="col-md-6">
+              <p>{{item.file.name}}</p>
+            </div>
+            <div class="col-md-4">
+              <!-- <mat-progress-bar class="example-margin" [color]="color" [mode]="mode" [value]="value" [bufferValue]="bufferValue">
+              </mat-progress-bar> -->
+              <div class="progress" style="margin-bottom: 0;">
+                <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+            </div>
+            </div>
+            <div class="col-md-1 text-right">
+                <button mat-mini-fab (click)="item.upload()" color="blue">
+                  <mat-icon>cloud_upload</mat-icon>
+                </button>
+              </div>
+            <div class="col-md-1 text-right">
+              <button mat-mini-fab (click)="item.remove()" color="warn">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+          
+        </div> 
+        <div class="col-md-12 mt-4">
+            <button mat-stroked-button (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length" color="primary">Guardar</button>
+          </div>      
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center align-items-start">
+    <div class="col-md-8">
+      <div class="row" *ngFor="let item of attachmentList">
+        <div class="col-md-6">
+          <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-title>{{item.originalname}}</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="../../../uploads/image-1530716817462.jpg" alt="Photo of a Shiba Inu">
+            <mat-card-actions>
+              <!-- <button mat-button>LIKE</button>
+              <button mat-button>SHARE</button> -->
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

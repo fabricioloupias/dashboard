@@ -1,0 +1,108 @@
+<div class="container">
+  <h2>Crud Usuarios</h2>
+  <form action="" [formGroup]="crudUser" (ngSubmit)="addUser()" class="my-3">
+    <div class="row">
+      <div class="col-md-3">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Nombre" type="text" formControlName="name" value="">
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Apellido" type="text" formControlName="apellido" value="">
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Email" type="text" formControlName="email" value="">
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Pais" type="text" formControlName="pais" value="">
+        </mat-form-field>
+      </div>
+      <div class="col-md-12">
+        <button type="submit" [disabled]="! crudUser.valid" mat-raised-button color="warn">Agregar</button>
+      </div>
+    </div>
+  </form>
+  <div class="table-responsive my-5">
+    <table class="table shadow p-3 mb-5 bg-white rounded">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Email</th>
+          <th scope="col">Pais</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users | async">
+          <th scope="row">{{user.id}}</th>
+          <td>{{user.name}}</td>
+          <td>{{user.apellido}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.pais}}</td>
+          <td class="text-right">
+            <button mat-icon-button matTooltip="Editar" (click)="editar(user)" data-toggle="modal" data-target="#exampleModal">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Eliminar" (click)="deleteUser(user)" color="warn">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar usuario</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" [formGroup]="crudUser" (ngSubmit)="updateUser(key)" class="my-3">
+          <div class="row">
+            <div class="col-md-12" hidden>
+              <input matInput value={{key}} type="text" >
+            </div>
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Ingresa nuevo nombre" value={{infoUser.name}} type="text" formControlName="name">
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Ingresa nuevo apellido" formControlName="apellido" value={{infoUser.apellido}} type="text">
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Ingresa nuevo email" formControlName="email" value={{infoUser.email}} type="text">
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Ingresa nuevo pais" formControlName="pais" value={{infoUser.pais}} type="text">
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <button type="submit" [disabled]="! crudUser.valid" mat-raised-button color="warn">Agregar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

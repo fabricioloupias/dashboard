@@ -1,0 +1,20 @@
+.example-card {
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+.birthday{
+    position: relative;
+}
+.birthday i{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: white;
+    padding: 13px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%
+}

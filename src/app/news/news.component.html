@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row align-items-start">
+    <div class="col-md-3">
+      <app-birthday-feed></app-birthday-feed>
+    </div>
+    <div class="col-md-6">
+      <mat-card class="example-card mb-5">
+        <mat-card-header class="mb-5">
+          <div mat-card-avatar class="example-header-image"></div>
+          <form [formGroup]="newState" class="example-form" (ngSubmit)="addState()">
+            <mat-form-field class="example-full-width">
+              <textarea matInput formControlName="mensaje" placeholder="Escribe un mensaje"></textarea>
+            </mat-form-field>
+              
+              <button (click)="fileInput.click()" mat-mini-fab color="white" routerLink="." matTooltip="Subir foto" aria-label="">
+                <i class="material-icons">
+                  insert_photo
+                </i>
+              </button>
+              <a mat-mini-fab color="white" routerLink="." matTooltip="Compartir ubicación" aria-label="">
+                <i class="material-icons">
+                  near_me
+                </i>
+              </a>            
+              <a mat-raised-button color="warn" routerLink=".">Publicar</a>
+              <input class="d-none" #fileInput  type="file" formControlName="foto" (change)="fileSelected($event)">
+          </form>
+          <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+        </mat-card-header>
+        <mat-card-content>
+            
+          </mat-card-content>
+      </mat-card>
+      <app-feed></app-feed>
+    </div>
+    <div class="col-md-3">
+      <app-album-photos></app-album-photos>
+    </div>
+  </div>
+</div>

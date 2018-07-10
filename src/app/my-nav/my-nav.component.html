@@ -1,0 +1,52 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+    <mat-toolbar color="primary">Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/beats">Beats</a>
+      <a mat-list-item routerLink="/news"><i class="material-icons">
+        bookmark
+        </i>Noticias
+      </a>
+      <a mat-list-item routerLink="."><i class="material-icons">
+        event
+        </i>Eventos
+      </a>
+      <a mat-list-item routerLink="."><i class="material-icons">
+        person
+        </i>Amigos
+      </a>
+      <a mat-list-item routerLink="/album"><i class="material-icons">
+        insert_photo
+        </i>Fotos
+      </a>
+      <a mat-list-item routerLink="/photos"><i class="material-icons">
+        list
+        </i>List Photos
+      </a>
+      <a mat-list-item routerLink="/users">
+        <i class="material-icons">person</i>
+        Crud Users
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>{{ title }}</span>
+      <div class="button-row">
+        <button mat-icon-button color="white" routerLink="/upload">
+          <mat-icon aria-label="Subir">
+            <i class="material-icons">
+              cloud_upload
+            </i>
+          </mat-icon>
+        </button>
+        <a mat-raised-button color="warn" routerLink="/registro">Registro</a>
+      </div>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
