@@ -3,7 +3,7 @@ import {  AngularFireStorage,  AngularFireStorageReference,  AngularFireUploadTa
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import {MatSnackBar} from '@angular/material';
 import {  Observable} from 'rxjs';
-import {  finalize } from 'rxjs/operators';
+import {  finalize, tap } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 
 interface Photo {
@@ -53,10 +53,13 @@ export class PhotosListComponent implements OnInit {
     try{
       // observe percentage changes
       this.uploadPercent = task.percentageChanges();
-      console.log(this.uploadPercent)
       // get notified when the download URL is available
       task.snapshotChanges().pipe(
-          finalize(() => this.downloadURL = fileRef.getDownloadURL())
+          finalize( () => {this.downloadURL = fileRef.getDownloadURL()
+            this.downloadURL.subscribe(data => {
+              this.savePhoto(data);
+            })
+          }),
         )
         .subscribe(console.log)  
     } catch (err) {
@@ -77,7 +80,6 @@ export class PhotosListComponent implements OnInit {
         duration: 4000
       });
     }
-    this.photos.subscribe(console.log)
   }
 
 
