@@ -1,1 +1,7 @@
-<my-nav></my-nav>
+<!-- <app-login></app-login> -->
+<div *ngIf="afAuth.user | async as user; else showLogin">
+  <my-nav></my-nav>
+</div>
+<ng-template #showLogin>
+  <app-login></app-login>
+</ng-template>

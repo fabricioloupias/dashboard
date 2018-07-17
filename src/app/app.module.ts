@@ -20,12 +20,14 @@ import { FileUploadModule } from 'ng2-file-upload';
 import {MatSortModule} from '@angular/material/sort';
 import {MatDialogModule} from '@angular/material/dialog';
 
-import { UploadBeatComponent } from './upload-beat/upload-beat.component';
 import { RegistroComponent } from './registro/registro.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { PhotosListComponent } from './photos-list/photos-list.component';
 import { CrudUserComponent } from './crud-user/crud-user.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+
+//Guard
+import { AuthGuard } from './core/auth.guard'
 
 //Firebase
 import { AngularFireModule } from 'angularfire2';
@@ -34,23 +36,27 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 
+// Core module
+import { CoreModule } from './core/core.module';
+import { LoginComponent } from './login/login.component'
+
 
 
 const appRoutes: Routes = [
-  { path: 'upload', component: UploadBeatComponent },
   { path: 'registro', component: RegistroComponent },
-  { path: 'photos', component: PhotosListComponent },
-  { path: 'users', component: CrudUserComponent }
+  { path: 'photos', component: PhotosListComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent },
+  { path: 'users', component: CrudUserComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     MyNavComponent,
-    UploadBeatComponent,
     RegistroComponent,
     PhotosListComponent,
     CrudUserComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,9 +92,11 @@ const appRoutes: Routes = [
     AngularFirestoreModule,
     AngularFireAuthModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    CoreModule
   ],
   providers: [
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

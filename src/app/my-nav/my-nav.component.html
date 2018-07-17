@@ -3,8 +3,9 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="/photos"><i class="material-icons">
-        list
+      <a mat-list-item routerLink="/photos">
+        <i class="material-icons">
+          list
         </i>List Photos
       </a>
       <a mat-list-item routerLink="/users">
@@ -13,21 +14,15 @@
       </a>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content *ngIf="auth.user | async as user">
     <mat-toolbar color="primary">
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>{{ title }}</span>
+      <img src="{{user.photoURL}}" width="36" alt="">
+      <span class="ml-3">{{user.displayName }}</span>
       <div class="button-row">
-        <button mat-icon-button color="white" routerLink="/upload">
-          <mat-icon aria-label="Subir">
-            <i class="material-icons">
-              cloud_upload
-            </i>
-          </mat-icon>
-        </button>
-        <a mat-raised-button color="warn" routerLink="/registro">Registro</a>
+        <button mat-raised-button color="warn" (click)="logout()">Cerrar Sesion</button>
       </div>
     </mat-toolbar>
     <router-outlet></router-outlet>

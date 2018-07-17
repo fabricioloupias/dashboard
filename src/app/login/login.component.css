@@ -1,0 +1,8 @@
+.mat-raised-button{
+    min-width: 100%;
+}
+.row{
+    height: 100vh;
+    background: #673ab7;
+    width: 100%;
+}

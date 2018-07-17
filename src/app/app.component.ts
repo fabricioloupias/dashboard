@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { auth } from 'firebase';
 
 
 @Component({
@@ -8,4 +10,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Proartisfy';
+
+  constructor(public afAuth: AngularFireAuth) { }
+
+ 
 }
